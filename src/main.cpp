@@ -132,8 +132,8 @@ std::string to_string(const Polygon &p) {
 
 enum PolygonLineCollisionResult {
   CONTAINS =0,
-  PARTILLY_CONTAINS,
   CROSS,
+  PARTIALLY_CONTAINS,
   OUTSIDE
 };
 typedef PolygonLineCollisionResult polyResult;
@@ -144,7 +144,7 @@ polyResult poly_collision(const Polygon &p, const Line &l) {
   uint32_t points_inside_count = p.points_inside_count(l);
 
   if(points_inside_count==2) return CONTAINS;
-  if(points_inside_count==1) return PARTILLY_CONTAINS;
+  if(points_inside_count==1) return PARTIALLY_CONTAINS;
   if(points_inside_count==0 && collision_count>=2) return CROSS;
   return OUTSIDE;
 }
@@ -236,7 +236,7 @@ std::string result_to_string(int result) {
   case CROSS:
     result_string = "crossing";
     break;
-  case PARTILLY_CONTAINS:
+  case PARTIALLY_CONTAINS:
     result_string = "partilly crossing";
     break;
   case OUTSIDE:
